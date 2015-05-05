@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "2.1",
+  "application": {
+    "name": "HTTPFS",
+    "components": [ { "name": "HTTPFS",
+                      "commands": [ { "exec": "{$conf:@//site/global/java_home}/bin/java -Djava.util.logging.config.file={$conf:@//site/global/app_root}/conf/logging.properties -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Xmx{$conf:@//site/global/heapsize} -Dhttpfs.home.dir={$conf:@//site/global/app_root} -Dhttpfs.config.dir={$conf:@//site/global/app_root}/conf -Dhttpfs.log.dir={$conf:@//site/global/app_log_dir}/ -Dhttpfs.temp.dir={$conf:@//site/global/app_pid_dir} -Dhttpfs.admin.port={$conf:@//site/global/admin_port} -Dhttpfs.http.port={$conf:@//site/global/port} -Dhttpfs.ssl.enabled=false -classpath {$conf:@//site/global/app_root}/bigtop-tomcat/bin/bootstrap.jar -Dcatalina.base={$conf:@//site/global/app_root}/tomcat-deployment -Dcatalina.home={$conf:@//site/global/app_root}/bigtop-tomcat -Djava.io.tmpdir={$conf:@//site/global/app_pid_dir} org.apache.catalina.startup.Bootstrap httpfs start
+" } ] } ],
+    "packages": [ { "type": "tarball",
+                    "name": "files/httpfs-deployment.tar.gz" } ],
+    "config": [ { "type": "xml",
+                  "name": "httpfs-site.xml" },
+                { "type": "env",
+                  "name": "httpfs-env.sh" },
+                { "type": "properties",
+                  "name": "httpfs-log4j.properties" } ] } }

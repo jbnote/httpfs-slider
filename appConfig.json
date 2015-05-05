@@ -1,0 +1,11 @@
+{
+  "schema" : "http://example.org/specification/v2.0.0",
+  "metadata" : {
+  },
+  "global" : {
+    "site.global.java_home": "/usr/lib/jvm/java-1.8.0-openjdk",
+    "site.global.heapsize": "2g",
+    "site.global.port": "14000",
+    "site.global.admin_port": "14001"
+  }
+}
