@@ -4,8 +4,25 @@
   },
   "global" : {
     "site.global.java_home": "/usr/lib/jvm/java-1.8.0-openjdk",
+    "site.global.hostname": "${THIS_HOST}",
     "site.global.heapsize": "2g",
     "site.global.port": "14000",
-    "site.global.admin_port": "14001"
+    "site.global.admin_port": "14001",
+    "site.global.user": "${USER}",
+    "site.global.group": "yarn",
+    "site.global.app_root": "${AGENT_WORK_ROOT}/app/install",
+    "site.global.app_conf_dir": "${AGENT_WORK_ROOT}/app/install/conf",
+    "site.global.app_log_dir": "${AGENT_WORK_ROOT}/app/log",
+    "site.global.pid_file": "${AGENT_WORK_ROOT}/app/run/httpfs.pid",
+    "site.global.start_command": "${@//site/global/java_home}/bin/java -Djava.util.logging.config.file=${@//site/global/app_root}/conf/logging.properties -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Xmx${@//site/global/heapsize} -Dhttpfs.home.dir=${@//site/global/app_root} -Dhttpfs.config.dir=${@//site/global/app_root}/conf -Dhttpfs.log.dir=${@//site/global/app_log_dir} -Dhttpfs.temp.dir=${@//site/global/app_pid_dir} -Dhttpfs.admin.port=${@//site/global/admin_port} -Dhttpfs.http.port=${@//site/global/port} -Dhttpfs.ssl.enabled=false -classpath ${@//site/global/app_root}/bigtop-tomcat/bin/bootstrap.jar -Dcatalina.base=${@//site/global/app_root}/tomcat-deployment -Dcatalina.home=${@//site/global/app_root}/bigtop-tomcat -Djava.io.tmpdir=${@//site/global/app_pid_dir} org.apache.catalina.startup.Bootstrap httpfs start",
+
+    "site.kerberos.realm": "EXAMPLE.COM",
+    "site.httpfs-site.httpfs.authentication.kerberos.principal": "${@//site/global/hostname}@${@//site/kerberos/realm}",
+    "site.httpfs-site.httpfs.hadoop.authentication.kerberos.principal": "${@//site/global/hostname}@${@//site/kerberos/realm}"
+  },
+  "components": {
+    "slider-appmaster": {
+      "jvm.heapsize": "256M"
+    }
   }
 }
